@@ -1,4 +1,5 @@
-function euler(f::Function, x::Integer, y::Integer, n::Integer, xn::Integer)
+function euler(f::Function, x::Integer, y::Integer,
+               n::Integer, xn::Integer)
     h = (y - a)/n
     t = a
     yn = xn
@@ -6,5 +7,5 @@ function euler(f::Function, x::Integer, y::Integer, n::Integer, xn::Integer)
         yn = yn + h*f(t, yn)
         t = a + i*h
     end
-    return [t, yn]
+    return [x, xn, t, yn]
 end

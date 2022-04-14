@@ -29,6 +29,18 @@ function getCoefficients(X, Y)
     return F
 end
 
+"""
+    divid(X, Y, cff)
+
+Computes interpolating polynomial passing through the points whoose coordinates are provided in `X[]` and `Y[]`
+using Newton's divided difference method. Returns `::Array{Float64}` if `cff = true` (default), or the interpolating polynomial P if `cff = false`. 
+
+    divid(X::Array{Float64}, Y::Array{Float64}, cff::Bool=true)
+
+### OUTPUT:
+  * `F` - coefficiants of the interpolating polynomial of the type `Array{Float64}`,
+  * `P` - interpolating polynomial.
+"""
 function divid(X::Array{Float64}, Y::Array{Float64}, cff::Bool=true)
     if cff
         return getCoefficients(X, Y)

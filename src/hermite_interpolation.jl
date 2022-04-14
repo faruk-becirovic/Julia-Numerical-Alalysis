@@ -1,3 +1,15 @@
+"""
+    hermit(X, Y, Yp)
+
+Computes interpolating polynomial passing through the points whoose coordinates are provided in `X[]` and `Y[]`,
+as well as the values of differentiated function in `Yp[]`, using Hermite interpolation method. 
+Returns coefficiants of the Hermite polynomial. 
+
+    hermit(X::Array{Float64}, Y::Array::Float64, Yp::Array{Float64})
+
+### OUTPUT:
+  * `P` - coefficiants of the interpolating polynomial of the type `Array{Float64}`,
+"""
 function hermit(X::Array{Float64}, Y::Array{Float64}, Yp::Array{Float64})
     n = length(X)
     Z = zeros(n*2)

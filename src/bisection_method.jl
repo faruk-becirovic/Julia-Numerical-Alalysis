@@ -1,18 +1,25 @@
 """
-    bisect(a, b, f, e, n)
+    bisect(a::Float64, b:Float64, f::Function[, e::Float64, n::Integer])
 
-Compute the root of the given function using Bisection method.
-Uses midpoint of the interval `[a, b]`, replacing one of the endpoinds with 
-midpoint depending on the location of the root in relation to the midpoint and repeting the process
-untill the approximation `p` of the root of the function `f` is found within the specified error margin.
+Compute the root of the given function using **Bisection method**.
 
-    bisect(a::Integer, b:Integer, f::Function, e::Float64, n::Integer)
+Uses midpoint of the interval [`a`, `b`], replacing one of the endpoinds with 
+midpoint depending on the location of the root in relation to the midpoint
+and repeting the process untill the approximation `p` of the root of
+the function `f` is found within the specified error margin.
 
-### OUTPUT:
+#ARGUMENTS
+- `a::Float64`: lower bound of the interval.
+- `b::Float64`: upper bound of the interval.
+- `f::function`: equation whose root needs to be found.
+- `e::Float64`: optional, error tolerance ``ε`` for the method, default ``10^{-5}``.
+- `n::Integer`: optional, upper bound on the number of itterations, default `100`.
+
+# OUTPUT:
   * `p` - approximation of the root of the function `f` (Float64) or,
   * `-1` - if `n` the maximum number of iterations was exceeded.
 """
-function bisect(a::Integer, b:Integer, f::Function, e::Float64, n::Integer)
+function bisect(a::float, b::float, f::Function, e::float, n::Integer)
 
     Ap = []
     
@@ -22,15 +29,16 @@ function bisect(a::Integer, b:Integer, f::Function, e::Float64, n::Integer)
         ei = (b-a)/2
         push!(Ap, p)
 
+        if ei < e
+            return p
+        end
+
         if sign(f(a))*sign(f(p)) < 0
             b = p
         else
             a = p
         end
-
-        if ei < e
-            return Ap
-        end
+        
     end
 
     return -1
